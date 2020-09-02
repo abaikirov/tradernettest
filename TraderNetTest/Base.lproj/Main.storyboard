@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Okz-LP-jkH">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TraderNetTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="121"/>
+        </scene>
+        <!--QuotationsTVC-->
+        <scene sceneID="pFo-0a-nce">
+            <objects>
+                <tableViewController id="Okz-LP-jkH" customClass="QuotationsTVC" customModule="TraderNetTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Cht-Ow-snH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="quotationsCell" rowHeight="240" id="zdi-Ck-hZX" customClass="QuotationsCell" customModule="TraderNetTest" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="240"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zdi-Ck-hZX" id="dc7-J1-Ivz">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="240"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dik-QG-X3T" userLabel="qTicker">
+                                            <rect key="frame" x="28" y="19" width="42" height="179"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dF-Y9-TbE" userLabel="qLastTradeExchange">
+                                            <rect key="frame" x="28" y="206" width="31" height="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EX7-wm-Jqg">
+                                            <rect key="frame" x="74" y="98" width="312" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Cz-Ze-5Wu">
+                                            <rect key="frame" x="63" y="206" width="323" height="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="dik-QG-X3T" firstAttribute="leading" secondItem="dc7-J1-Ivz" secondAttribute="leadingMargin" constant="8" id="0EF-oM-SlZ"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="EX7-wm-Jqg" secondAttribute="trailing" constant="8" id="AP4-iu-BzM"/>
+                                        <constraint firstItem="5Cz-Ze-5Wu" firstAttribute="leading" secondItem="7dF-Y9-TbE" secondAttribute="trailing" constant="4" id="Dqn-Cu-eav"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="7dF-Y9-TbE" secondAttribute="bottom" constant="8" id="Faw-Fy-6Oj"/>
+                                        <constraint firstItem="7dF-Y9-TbE" firstAttribute="leading" secondItem="dc7-J1-Ivz" secondAttribute="leadingMargin" constant="8" id="NcA-OL-6ld"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="5Cz-Ze-5Wu" secondAttribute="bottom" constant="8" id="TjT-fI-BDt"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="5Cz-Ze-5Wu" secondAttribute="trailing" constant="8" id="eJw-dz-Wsb"/>
+                                        <constraint firstItem="EX7-wm-Jqg" firstAttribute="centerY" secondItem="dik-QG-X3T" secondAttribute="centerY" id="hFX-zL-Wje"/>
+                                        <constraint firstItem="7dF-Y9-TbE" firstAttribute="top" secondItem="dik-QG-X3T" secondAttribute="bottom" constant="8" id="rSg-27-Ccz"/>
+                                        <constraint firstItem="EX7-wm-Jqg" firstAttribute="leading" secondItem="dik-QG-X3T" secondAttribute="trailing" constant="4" id="rca-Hk-LvF"/>
+                                        <constraint firstItem="dik-QG-X3T" firstAttribute="top" secondItem="dc7-J1-Ivz" secondAttribute="topMargin" constant="8" id="vmN-6V-QUT"/>
+                                        <constraint firstItem="5Cz-Ze-5Wu" firstAttribute="centerY" secondItem="7dF-Y9-TbE" secondAttribute="centerY" id="x2N-PP-RPD"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="qDiffInPercent" destination="EX7-wm-Jqg" id="Vgh-0d-U5v"/>
+                                    <outlet property="qLastTradeExchange" destination="7dF-Y9-TbE" id="e6x-UX-k6U"/>
+                                    <outlet property="qPrice" destination="5Cz-Ze-5Wu" id="gj6-c3-VX7"/>
+                                    <outlet property="qTicker" destination="dik-QG-X3T" id="zEZ-7e-fpG"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Okz-LP-jkH" id="YjL-RN-Nyq"/>
+                            <outlet property="delegate" destination="Okz-LP-jkH" id="KKm-gf-hnE"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zyi-wa-ZTP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="953.62318840579712" y="120.53571428571428"/>
+        </scene>
+    </scenes>
+</document>

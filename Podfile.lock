@@ -1,0 +1,32 @@
+PODS:
+  - QuickLayout (3.0.0)
+  - SnapKit (4.2.0)
+  - Socket.IO-Client-Swift (15.2.0):
+    - Starscream (~> 3.1)
+  - Starscream (3.1.1)
+  - SwiftEntryKit (1.2.5):
+    - QuickLayout (= 3.0.0)
+
+DEPENDENCIES:
+  - SnapKit (~> 4.0)
+  - Socket.IO-Client-Swift (~> 15.2.0)
+  - SwiftEntryKit (= 1.2.5)
+
+SPEC REPOS:
+  trunk:
+    - QuickLayout
+    - SnapKit
+    - Socket.IO-Client-Swift
+    - Starscream
+    - SwiftEntryKit
+
+SPEC CHECKSUMS:
+  QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
+  SwiftEntryKit: 303613272970068d2e86ea5b7ab6d016b28ba5d9
+
+PODFILE CHECKSUM: 8392ac308f93dfa685ced60536ed1f2231d97711
+
+COCOAPODS: 1.8.4
