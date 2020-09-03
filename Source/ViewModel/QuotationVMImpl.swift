@@ -13,7 +13,7 @@ class QuotationVMImpl: QuotationVM {
   private var q: Quotation
   
   var name: String {
-    q.name
+    q.name ?? ""
   }
   
   var ticker: String {
@@ -21,25 +21,26 @@ class QuotationVMImpl: QuotationVM {
   }
   
   var exchange: String {
-    q.lastTradeExchange
+    q.lastTradeExchange ?? ""
   }
   
   var percent: String {
-    "\(q.diffInPercent)"
+    "\(q.diffInPercent ?? 0.0)"
   }
   
   var price: String {
-    "\(q.lastTradePrice)"
+    "\(q.lastTradePrice ?? 0.0)"
   }
   
   var change: String {
-    "\(q.change)"
+    "\(q.change ?? 0.0)"
   }
   
   var percentColor: UIColor {
-    if (q.diffInPercent > 0) {
+    guard let diff = q.diffInPercent else { return UIColor.systemGray2 }
+    if (diff > 0) {
       return UIColor.green
-    } else if (q.diffInPercent < 0) {
+    } else if (diff < 0) {
       return UIColor.red
     } else {
       return UIColor.systemGray2
@@ -47,13 +48,13 @@ class QuotationVMImpl: QuotationVM {
   }
   
   var isChanged: Bool {
-    print("isChanged \(ticker): \(oldPercent != nil && oldPercent != q.diffInPercent) \(oldPercent) \(q.diffInPercent)")
     return oldPercent != nil && oldPercent != q.diffInPercent
   }
   
   var percentChangedBackColor: UIColor {
     guard let oldP = oldPercent else { return UIColor.clear }
-    let diff = q.diffInPercent - oldP
+    guard let newP = q.diffInPercent else { return UIColor.clear }
+    let diff = newP - oldP
     if (diff > 0) {
       return UIColor.green
     } else if (diff < 0) {
@@ -65,7 +66,8 @@ class QuotationVMImpl: QuotationVM {
   
   var percentChangedColor: UIColor {
     guard let oldP = oldPercent else { return percentColor }
-    let diff = q.diffInPercent - oldP
+    guard let newP = q.diffInPercent else { return percentColor }
+    let diff = newP - oldP
     if (diff == 0) {
       return percentColor
     } else {
@@ -80,8 +82,7 @@ class QuotationVMImpl: QuotationVM {
   }
   
   func updateQuotation(_ newQ: Quotation) {
-    print("update: \(q.ticker)->\(newQ.ticker) \(q.diffInPercent)->\(newQ.diffInPercent)")
     oldPercent = q.diffInPercent
-    q = newQ
+    q.update(q: newQ)
   }
 }

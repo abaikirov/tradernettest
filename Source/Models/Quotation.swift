@@ -10,37 +10,53 @@ import Foundation
 
 struct Quotation {
   let ticker: String //c
-  let diffInPercent: Double //pcp
-  let lastTradeExchange: String //ltr
-  let name: String //name
-  let lastTradePrice: Double //ltp
-  let change: Double //chg
-  let minStep: Double //min_step
+  var diffInPercent: Double? //pcp
+  var lastTradeExchange: String? //ltr
+  var name: String? //name
+  var lastTradePrice: Double? //ltp
+  var change: Double? //chg
+  var minStep: Double? //min_step
   
   init?(dictionary: [String: Any]) {
     guard
-      let c = dictionary["c"] as? String,
-      let pcp = dictionary["pcp"] as? Double,
-      let ltr = dictionary["ltr"] as? String,
-      let name = dictionary["name"] as? String,
-      let ltp = dictionary["ltp"] as? Double,
-      let chg = dictionary["chg"] as? Double,
-      let minStep = dictionary["min_step"] as? Double
+      let c = dictionary["c"] as? String
     else {
         return nil
     }
     
     ticker = c
-    diffInPercent = pcp
-    lastTradeExchange = ltr
-    self.name = name
-    lastTradePrice = ltp
-    change = chg
-    self.minStep = minStep
+    diffInPercent = dictionary["pcp"] as? Double
+    lastTradeExchange = dictionary["ltr"] as? String
+    name = dictionary["name"] as? String
+    lastTradePrice = dictionary["ltp"] as? Double
+    change = dictionary["chg"] as? Double
+    minStep = dictionary["min_step"] as? Double
   }
   
   func getRoundedToMinStepPrice() -> String {
+    guard let minStep = minStep, let price = lastTradePrice else { return "\(lastTradePrice ?? 0.0)" }
     let denominator = 1 / minStep
-    return String(round(lastTradePrice * denominator) / denominator)
+    return String(round(price * denominator) / denominator)
+  }
+  
+  mutating func update(q: Quotation) {
+    if q.diffInPercent != nil {
+      diffInPercent = q.diffInPercent
+    }
+    if q.lastTradeExchange != nil {
+      lastTradeExchange = q.lastTradeExchange
+    }
+    if q.lastTradePrice != nil {
+      lastTradePrice = q.lastTradePrice
+    }
+    if q.change != nil {
+      change = q.change
+    }
+    if q.minStep != nil {
+      minStep = q.minStep
+    }
+    if q.name != nil {
+      name = q.name
+    }
   }
 }
