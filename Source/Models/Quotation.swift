@@ -31,6 +31,12 @@ struct Quotation {
     lastTradePrice = dictionary["ltp"] as? Double
     change = dictionary["chg"] as? Double
     minStep = dictionary["min_step"] as? Double
+    
+    if let nameData = name?.data(using: .isoLatin1) {
+      if let decodedName = String(data: nameData, encoding: .utf8) {
+        name = decodedName
+      }
+    }
   }
   
   func getRoundedToMinStepPrice() -> String {

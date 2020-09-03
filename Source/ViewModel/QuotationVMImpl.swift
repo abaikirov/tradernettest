@@ -13,7 +13,7 @@ class QuotationVMImpl: QuotationVM {
   private var q: Quotation
   
   var name: String {
-    q.name ?? ""
+    q.name ?? "---------"
   }
   
   var ticker: String {
@@ -21,19 +21,31 @@ class QuotationVMImpl: QuotationVM {
   }
   
   var exchange: String {
-    q.lastTradeExchange ?? ""
+    q.lastTradeExchange ?? "----"
   }
   
   var percent: String {
-    "\(q.diffInPercent ?? 0.0)"
+    if q.diffInPercent != nil {
+      return "\(q.diffInPercent!)"
+    } else {
+      return "---"
+    }
   }
   
   var price: String {
-    "\(q.lastTradePrice ?? 0.0)"
+    if q.lastTradePrice != nil {
+      return "\(q.lastTradePrice!)"
+    } else {
+      return "---"
+    }
   }
   
   var change: String {
-    "\(q.change ?? 0.0)"
+    if q.change != nil {
+      return "\(q.change!)"
+    } else {
+      return "---"
+    }
   }
   
   var percentColor: UIColor {

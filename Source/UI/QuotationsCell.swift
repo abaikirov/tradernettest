@@ -74,6 +74,8 @@ class QuotationsCell: UITableViewCell {
     
     qLastTradeExchange.setContentHuggingPriority(.defaultLow, for: .horizontal)
     qTicker.setContentHuggingPriority(.defaultLow, for: .horizontal)
+    qPrice.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    qDiffInPercent.setContentHuggingPriority(.defaultHigh, for: .horizontal)
   }
   
   override func prepareForReuse() {
