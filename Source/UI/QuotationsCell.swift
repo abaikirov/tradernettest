@@ -30,6 +30,8 @@ class QuotationsCell: UITableViewCell {
   
   private lazy var qDiffInPercent: UILabel = {
     let label = UILabel()
+    label.layer.cornerRadius = 5
+    label.layer.masksToBounds = true
     return label
   }()
   
@@ -120,7 +122,7 @@ class QuotationsCell: UITableViewCell {
       qDiffInPercent.backgroundColor = q.percentChangedBackColor
       qDiffInPercent.textColor = q.percentChangedColor
     } else {
-      qDiffInPercent.backgroundColor = UIColor.clear
+      qDiffInPercent.backgroundColor = .clear
       qDiffInPercent.textColor = q.percentColor
     }
     if (q.imageURL != nil) {

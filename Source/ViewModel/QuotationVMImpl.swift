@@ -13,7 +13,7 @@ class QuotationVMImpl: QuotationVM {
   private var q: Quotation
   
   var name: String {
-    q.name ?? "---------"
+    q.name ?? "————————"
   }
   
   var ticker: String {
@@ -21,14 +21,14 @@ class QuotationVMImpl: QuotationVM {
   }
   
   var exchange: String {
-    q.lastTradeExchange ?? "----"
+    q.lastTradeExchange ?? "————"
   }
   
   var percent: String {
     if q.diffInPercent != nil {
       return "\(q.diffInPercent! >= 0 ? "+" : "")\(q.diffInPercent!)"
     } else {
-      return "---"
+      return "———"
     }
   }
   
@@ -37,7 +37,7 @@ class QuotationVMImpl: QuotationVM {
     if rounded != nil {
       return "\(rounded!)"
     } else {
-      return "---"
+      return "———"
     }
   }
   
@@ -46,7 +46,7 @@ class QuotationVMImpl: QuotationVM {
     if rounded != nil {
       return "\(rounded! >= 0 ? "+" : "")\(rounded!)"
     } else {
-      return "---"
+      return "———"
     }
   }
   
