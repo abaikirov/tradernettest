@@ -20,6 +20,7 @@ protocol QuotationVM {
   var isChanged: Bool { get }
   var percentChangedBackColor: UIColor { get }
   var percentChangedColor: UIColor { get }
+  var imageURL: URL? { get }
   
   func updateQuotation(_ newQ: Quotation)
 }

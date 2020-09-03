@@ -9,4 +9,5 @@ target 'TraderNetTest' do
   pod 'SnapKit', '~> 4.0'
   pod 'Socket.IO-Client-Swift', '~> 15.2.0'
   pod 'SwiftEntryKit', '1.2.5'
+  pod 'Kingfisher', '~> 5.0'
 end

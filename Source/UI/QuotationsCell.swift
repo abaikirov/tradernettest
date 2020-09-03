@@ -8,12 +8,14 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class QuotationsCell: UITableViewCell {
   static let reuseID = "\(QuotationsCell.self)"
   
   private lazy var qTicker: UILabel = {
     let label = UILabel()
+    label.font = UIFont.systemFont(ofSize: 20)
     return label
   }()
   
@@ -35,6 +37,11 @@ class QuotationsCell: UITableViewCell {
     return label
   }()
   
+  private lazy var qIcon: UIImageView = {
+    let iv = UIImageView()
+    return iv
+  }()
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     setupView()
@@ -53,10 +60,19 @@ class QuotationsCell: UITableViewCell {
       make.bottom.leading.equalToSuperview().inset(8)
     }
     
+    contentView.addSubview(qIcon)
+    qIcon.snp.makeConstraints { (make) in
+      make.top.leading.equalToSuperview().inset(8)
+      make.height.equalTo(16)
+      make.width.equalTo(0)
+      make.bottom.equalTo(qLastTradeExchange.snp.top).offset(-4)
+    }
+    
     contentView.addSubview(qTicker)
     qTicker.snp.makeConstraints { (make) in
-      make.top.leading.equalToSuperview().inset(8)
-      make.bottom.equalTo(qLastTradeExchange.snp.top).offset(-4)
+      make.top.equalToSuperview().inset(8)
+      make.leading.equalTo(qIcon.snp.trailing)
+      make.centerY.equalTo(qIcon.snp.centerY)
     }
     
     contentView.addSubview(qPrice)
@@ -84,6 +100,13 @@ class QuotationsCell: UITableViewCell {
     qLastTradeExchange.text = ""
     qDiffInPercent.text = ""
     qPrice.text = ""
+    qIcon.image = nil
+    qIcon.snp.updateConstraints { (make) in
+      make.width.equalTo(0)
+    }
+    qTicker.snp.updateConstraints { (make) in
+      make.leading.equalTo(qIcon.snp.trailing)
+    }
   }
   
   func onBind(q: QuotationVM) {
@@ -97,6 +120,27 @@ class QuotationsCell: UITableViewCell {
     } else {
       qDiffInPercent.backgroundColor = UIColor.clear
       qDiffInPercent.textColor = q.percentColor
+    }
+    if (q.imageURL != nil) {
+      qIcon.kf.setImage(with: q.imageURL) { [unowned self] (result) in
+        switch result {
+        case .success(let value):
+          self.showIcon(value.image.size)
+        case .failure(_):
+          return
+        }
+      }
+    }
+  }
+  
+  private func showIcon(_ iconSize: CGSize) {
+    if iconSize.width > 1 && iconSize.height > 1 {
+      qIcon.snp.updateConstraints { (make) in
+        make.width.equalTo(16)
+      }
+      qTicker.snp.updateConstraints { (make) in
+        make.leading.equalTo(qIcon.snp.trailing).offset(4)
+      }
     }
   }
 }

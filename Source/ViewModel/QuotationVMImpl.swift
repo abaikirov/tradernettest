@@ -87,6 +87,10 @@ class QuotationVMImpl: QuotationVM {
     }
   }
   
+  var imageURL: URL? {
+    URL(string: "\(Constants.imageURL)\(q.ticker.lowercased())")
+  }
+  
   private var oldPercent: Double?
   
   init(_ q: Quotation) {
