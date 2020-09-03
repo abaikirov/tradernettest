@@ -11,7 +11,7 @@ import Foundation
 protocol QuotationsServiceDelegate: class {
   func onConnect()
   func onDisconnect()
-  func onReconnect()
-  func onError()
+  func onReconnectAttempt()
+  func onError(_ message: String?)
   func onQuotations(data: [Any])
 }

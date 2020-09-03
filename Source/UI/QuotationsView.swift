@@ -12,8 +12,10 @@ protocol QuotationsView: class {
   var vm: QuotationsTVCVM { get set }
   
   func show(toUpdate: [Int], toAdd: [Int])
-  func showConnected()
-  func showDisconnected()
-  func showReconnected()
-  func showError()
+  func showConnect()
+  func showDisconnect()
+  func showReconnectAttempt()
+  func showError(_ message: String?)
+  func showEmpty()
+  func hideEmpty()
 }

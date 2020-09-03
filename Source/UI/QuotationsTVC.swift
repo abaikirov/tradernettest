@@ -8,14 +8,20 @@
 
 import UIKit
 import SnapKit
+import SwiftEntryKit
 
 class QuotationsTVC: UIViewController {
   var vm: QuotationsTVCVM
   
+  private var emptyLabel: UILabel?
+  
   private lazy var tableView: UITableView = {
     let tableView = UITableView()
+    tableView.allowsSelection = false
+    tableView.estimatedRowHeight = UITableView.automaticDimension
     tableView.register(QuotationsCell.self, forCellReuseIdentifier: QuotationsCell.reuseID)
     tableView.dataSource = self
+    tableView.delegate = self
     return tableView
   }()
   
@@ -34,6 +40,13 @@ class QuotationsTVC: UIViewController {
     vm.viewDidLoad()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    if vm.isConnecting {
+      showConnectingNote()
+    }
+  }
+  
   private func setupView() {
     title = "Quotations"
     
@@ -41,6 +54,88 @@ class QuotationsTVC: UIViewController {
     tableView.snp.makeConstraints { (make) in
       make.edges.equalToSuperview()
     }
+  }
+  
+  private func getAttrs(_ color: UIColor, duration: EKAttributes.DisplayDuration = 2) -> EKAttributes {
+    var attrs = EKAttributes.topNote
+    attrs.displayMode = EKAttributes.DisplayMode.inferred
+    attrs.displayDuration = duration
+    attrs.popBehavior = .animated(animation: .translation)
+    attrs.entryBackground = .color(color: EKColor(color))
+    attrs.statusBar = .light
+    return attrs
+  }
+  
+  private func getLabelStyle() -> EKProperty.LabelStyle {
+    return EKProperty.LabelStyle(
+      font: UIFont.systemFont(ofSize: 12),
+      color: .white,
+      alignment: .center,
+      displayMode: EKAttributes.DisplayMode.inferred
+    )
+  }
+  
+  private func showErrorNote(_ message: String?) {
+    let labelContent = EKProperty.LabelContent(
+      text: message ?? "Something went wrong(",
+      style: getLabelStyle()
+    )
+    let contentView = EKNoteMessageView(with: labelContent)
+    SwiftEntryKit.display(
+      entry: contentView,
+      using: getAttrs(
+        UIColor(rgb: 0xD32F2F),
+        duration: .infinity
+      )
+    )
+  }
+  
+  private func showConnectedNote() {
+    let labelContent = EKProperty.LabelContent(
+      text: "Connected!",
+      style: getLabelStyle()
+    )
+    let contentView = EKNoteMessageView(with: labelContent)
+    SwiftEntryKit.display(
+      entry: contentView,
+      using: getAttrs(UIColor(rgb: 0x69F0AE))
+    )
+  }
+  
+  private func showReconnectingNote() {
+    let labelContent = EKProperty.LabelContent(
+      text: "Reconnecting...",
+      style: getLabelStyle()
+    )
+    let contentView = EKProcessingNoteMessageView(
+      with: labelContent,
+      activityIndicator: .medium
+    )
+    SwiftEntryKit.display(
+      entry: contentView,
+      using: getAttrs(
+        UIColor(rgb: 0x1976D2),
+        duration: .infinity
+      )
+    )
+  }
+  
+  private func showConnectingNote() {
+    let labelContent = EKProperty.LabelContent(
+      text: "Connecting...",
+      style: getLabelStyle()
+    )
+    let contentView = EKProcessingNoteMessageView(
+      with: labelContent,
+      activityIndicator: .medium
+    )
+    SwiftEntryKit.display(
+      entry: contentView,
+      using: getAttrs(
+        UIColor(rgb: 0xE91E63),
+        duration: .infinity
+      )
+    )
   }
 }
 
@@ -52,24 +147,43 @@ extension QuotationsTVC: QuotationsView {
     tableView.endUpdates()
   }
   
-  func showConnected() {
-    //TODO
+  func showConnect() {
+    showConnectedNote()
   }
   
-  func showDisconnected() {
-    //TODO
+  func showDisconnect() {
+    showErrorNote("Disconnected")
   }
   
-  func showReconnected() {
-    //TODO
+  func showReconnectAttempt() {
+    showReconnectingNote()
   }
   
-  func showError() {
-    //TODO
+  func showError(_ message: String?) {
+    showErrorNote(message)
+  }
+  
+  func showEmpty() {
+    let emptyLabel = UILabel()
+    emptyLabel.text = "NO DATA"
+    emptyLabel.textColor = UIColor.systemGray3
+    emptyLabel.font = UIFont.boldSystemFont(ofSize: 24)
+    
+    view.addSubview(emptyLabel)
+    emptyLabel.snp.makeConstraints { (make) in
+      make.center.equalToSuperview()
+    }
+    
+    self.emptyLabel = emptyLabel
+  }
+  
+  func hideEmpty() {
+    emptyLabel?.removeFromSuperview()
+    emptyLabel = nil
   }
 }
 
-extension QuotationsTVC: UITableViewDataSource {
+extension QuotationsTVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { vm.count }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,6 +192,10 @@ extension QuotationsTVC: UITableViewDataSource {
     }
     cell.onBind(q: vm.get(indexPath.row))
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    return UIView()
   }
 }
 

@@ -30,12 +30,12 @@ class QuotationsServiceImpl: QuotationsService {
       self.delegate?.onDisconnect()
     }
     
-    socket.on(clientEvent: .reconnect) { [unowned self]  (data, ack) in
-      self.delegate?.onReconnect()
+    socket.on(clientEvent: .error) { [unowned self] (data, ack) in
+      self.delegate?.onError(data[0] as? String)
     }
     
-    socket.on(clientEvent: .error) { (data, ack) in
-      self.delegate?.onError()
+    socket.on(clientEvent: .reconnectAttempt) { [unowned self] (data, ack) in
+      self.delegate?.onReconnectAttempt()
     }
     
     socket.connect()

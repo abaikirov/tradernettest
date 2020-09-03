@@ -11,6 +11,7 @@ import Foundation
 protocol QuotationsTVCVM {
   var view: QuotationsView? { get set }
   var count: Int { get }
+  var isConnecting: Bool { get }
   
   func viewDidLoad()
   func get(_ position: Int) -> QuotationVM

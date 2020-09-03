@@ -76,6 +76,14 @@ class QuotationsCell: UITableViewCell {
     qTicker.setContentHuggingPriority(.defaultLow, for: .horizontal)
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    qTicker.text = ""
+    qLastTradeExchange.text = ""
+    qDiffInPercent.text = ""
+    qPrice.text = ""
+  }
+  
   func onBind(q: QuotationVM) {
     qTicker.text = q.ticker
     qLastTradeExchange.text = "\(q.exchange) | \(q.name)"
