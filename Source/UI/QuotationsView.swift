@@ -18,4 +18,5 @@ protocol QuotationsView: class {
   func showError(_ message: String?)
   func showEmpty()
   func hideEmpty()
+  func showLoading()
 }

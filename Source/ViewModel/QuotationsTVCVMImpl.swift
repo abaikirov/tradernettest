@@ -34,7 +34,7 @@ class QuotationsTVCVMImpl: QuotationsTVCVM {
   func viewDidLoad() {
     _isConnecting = true
     service.connect()
-    view?.showEmpty()
+    view?.showLoading()
   }
   
   private func mapResults(data: [Any]) {

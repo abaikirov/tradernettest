@@ -163,23 +163,35 @@ extension QuotationsTVC: QuotationsView {
     showErrorNote(message)
   }
   
+  func showLoading() {
+    addOrUpdateEmptyLabel("Loading...")
+  }
+  
   func showEmpty() {
-    let emptyLabel = UILabel()
-    emptyLabel.text = "NO DATA"
-    emptyLabel.textColor = UIColor.systemGray3
-    emptyLabel.font = UIFont.boldSystemFont(ofSize: 36)
-    
-    view.addSubview(emptyLabel)
-    emptyLabel.snp.makeConstraints { (make) in
-      make.center.equalToSuperview()
-    }
-    
-    self.emptyLabel = emptyLabel
+    addOrUpdateEmptyLabel("NO DATA")
   }
   
   func hideEmpty() {
     emptyLabel?.removeFromSuperview()
     emptyLabel = nil
+  }
+  
+  private func addOrUpdateEmptyLabel(_ text: String) {
+    if self.emptyLabel != nil {
+      self.emptyLabel?.text = text
+    } else {
+      let emptyLabel = UILabel()
+      emptyLabel.text = text
+      emptyLabel.textColor = UIColor.systemGray3
+      emptyLabel.font = UIFont.boldSystemFont(ofSize: 36)
+      
+      view.addSubview(emptyLabel)
+      emptyLabel.snp.makeConstraints { (make) in
+        make.center.equalToSuperview()
+      }
+      
+      self.emptyLabel = emptyLabel
+    }
   }
 }
 
