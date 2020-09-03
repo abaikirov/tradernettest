@@ -13,15 +13,17 @@ import Kingfisher
 class QuotationsCell: UITableViewCell {
   static let reuseID = "\(QuotationsCell.self)"
   
+  private let iconSide: CGFloat = 16
+  
   private lazy var qTicker: UILabel = {
     let label = UILabel()
-    label.font = UIFont.systemFont(ofSize: 20)
+    label.font = .tnT1
     return label
   }()
   
   private lazy var qLastTradeExchange: UILabel = {
     let label = UILabel()
-    label.font = UIFont.systemFont(ofSize: 12)
+    label.font = .tnSmall
     label.textColor = UIColor.systemGray2
     return label
   }()
@@ -33,7 +35,7 @@ class QuotationsCell: UITableViewCell {
   
   private lazy var qPrice: UILabel = {
     let label = UILabel()
-    label.font = UIFont.systemFont(ofSize: 12)
+    label.font = .tnSmall
     return label
   }()
   
@@ -53,39 +55,39 @@ class QuotationsCell: UITableViewCell {
   }
   
   private func setupView() {
-    separatorInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+    separatorInset = UIEdgeInsets(top: 0, left: Constants.Offsets.standart, bottom: 0, right: 0)
     
     contentView.addSubview(qLastTradeExchange)
     qLastTradeExchange.snp.makeConstraints { (make) in
-      make.bottom.leading.equalToSuperview().inset(8)
+      make.bottom.leading.equalToSuperview().inset(Constants.Offsets.standart)
     }
     
     contentView.addSubview(qIcon)
     qIcon.snp.makeConstraints { (make) in
-      make.top.leading.equalToSuperview().inset(8)
-      make.height.equalTo(16)
+      make.top.leading.equalToSuperview().inset(Constants.Offsets.standart)
+      make.height.equalTo(iconSide)
       make.width.equalTo(0)
-      make.bottom.equalTo(qLastTradeExchange.snp.top).offset(-4)
+      make.bottom.equalTo(qLastTradeExchange.snp.top).offset(-Constants.Offsets.small)
     }
     
     contentView.addSubview(qTicker)
     qTicker.snp.makeConstraints { (make) in
-      make.top.equalToSuperview().inset(8)
+      make.top.equalToSuperview().inset(Constants.Offsets.standart)
       make.leading.equalTo(qIcon.snp.trailing)
       make.centerY.equalTo(qIcon.snp.centerY)
     }
     
     contentView.addSubview(qPrice)
     qPrice.snp.makeConstraints { (make) in
-      make.bottom.trailing.equalToSuperview().inset(8)
+      make.bottom.trailing.equalToSuperview().inset(Constants.Offsets.standart)
       make.leading.equalTo(qLastTradeExchange.snp.trailing).offset(4)
     }
     
     contentView.addSubview(qDiffInPercent)
     qDiffInPercent.snp.makeConstraints { (make) in
-      make.top.trailing.equalToSuperview().inset(8)
-      make.bottom.equalTo(qPrice.snp.top).offset(-4)
-      make.leading.equalTo(qTicker.snp.trailing).offset(4)
+      make.top.trailing.equalToSuperview().inset(Constants.Offsets.standart)
+      make.bottom.equalTo(qPrice.snp.top).offset(-Constants.Offsets.small)
+      make.leading.equalTo(qTicker.snp.trailing).offset(Constants.Offsets.small)
     }
     
     qLastTradeExchange.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -136,10 +138,10 @@ class QuotationsCell: UITableViewCell {
   private func showIcon(_ iconSize: CGSize) {
     if iconSize.width > 1 && iconSize.height > 1 {
       qIcon.snp.updateConstraints { (make) in
-        make.width.equalTo(16)
+        make.width.equalTo(iconSide)
       }
       qTicker.snp.updateConstraints { (make) in
-        make.leading.equalTo(qIcon.snp.trailing).offset(4)
+        make.leading.equalTo(qIcon.snp.trailing).offset(Constants.Offsets.small)
       }
     }
   }

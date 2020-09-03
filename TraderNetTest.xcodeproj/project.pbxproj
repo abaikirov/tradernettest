@@ -12,6 +12,7 @@
 		B53FDAAA24FFEAC600AA83A2 /* QuotationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53FDAA924FFEAC600AA83A2 /* QuotationsView.swift */; };
 		B53FDAAC24FFEB7800AA83A2 /* QuotationsTVCVMImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53FDAAB24FFEB7800AA83A2 /* QuotationsTVCVMImpl.swift */; };
 		B53FDAB72500A7E100AA83A2 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53FDAB62500A7E100AA83A2 /* UIColor+Extension.swift */; };
+		B53FDABB2500FB2800AA83A2 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53FDABA2500FB2800AA83A2 /* UIFont+Extension.swift */; };
 		B5A5367824FF7A4B00A06C83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5367724FF7A4B00A06C83 /* AppDelegate.swift */; };
 		B5A5367A24FF7A4B00A06C83 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5367924FF7A4B00A06C83 /* SceneDelegate.swift */; };
 		B5A5367C24FF7A4B00A06C83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5367B24FF7A4B00A06C83 /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 		B53FDAA924FFEAC600AA83A2 /* QuotationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotationsView.swift; sourceTree = "<group>"; };
 		B53FDAAB24FFEB7800AA83A2 /* QuotationsTVCVMImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotationsTVCVMImpl.swift; sourceTree = "<group>"; };
 		B53FDAB62500A7E100AA83A2 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		B53FDABA2500FB2800AA83A2 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		B5A5367424FF7A4B00A06C83 /* TraderNetTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TraderNetTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A5367724FF7A4B00A06C83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5A5367924FF7A4B00A06C83 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			children = (
 				B5A5369D24FFD99900A06C83 /* Constants.swift */,
 				B53FDAB62500A7E100AA83A2 /* UIColor+Extension.swift */,
+				B53FDABA2500FB2800AA83A2 /* UIFont+Extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				B53FDAB72500A7E100AA83A2 /* UIColor+Extension.swift in Sources */,
 				B5A536A224FFE7F100A06C83 /* QuotationsServiceDelegate.swift in Sources */,
 				B53FDAAC24FFEB7800AA83A2 /* QuotationsTVCVMImpl.swift in Sources */,
+				B53FDABB2500FB2800AA83A2 /* UIFont+Extension.swift in Sources */,
 				B5A5367824FF7A4B00A06C83 /* AppDelegate.swift in Sources */,
 				B5A5369024FF82CD00A06C83 /* Quotation.swift in Sources */,
 				B53FDAA824FFEA6800AA83A2 /* QuotationsTVCVM.swift in Sources */,

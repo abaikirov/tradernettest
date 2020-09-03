@@ -51,11 +51,11 @@ class QuotationVMImpl: QuotationVM {
   var percentColor: UIColor {
     guard let diff = q.diffInPercent else { return UIColor.systemGray2 }
     if (diff > 0) {
-      return UIColor.green
+      return .tnGreen
     } else if (diff < 0) {
-      return UIColor.red
+      return .tnRed
     } else {
-      return UIColor.systemGray2
+      return .systemGray2
     }
   }
   
@@ -68,11 +68,11 @@ class QuotationVMImpl: QuotationVM {
     guard let newP = q.diffInPercent else { return UIColor.clear }
     let diff = newP - oldP
     if (diff > 0) {
-      return UIColor.green
+      return .tnGreen
     } else if (diff < 0) {
-      return UIColor.red
+      return .tnRed
     } else {
-      return UIColor.clear
+      return .clear
     }
   }
   
@@ -83,7 +83,7 @@ class QuotationVMImpl: QuotationVM {
     if (diff == 0) {
       return percentColor
     } else {
-      return UIColor.white
+      return .white
     }
   }
   

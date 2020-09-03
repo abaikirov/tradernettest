@@ -62,7 +62,7 @@ class QuotationsTVC: UIViewController {
     attrs.displayDuration = duration
     attrs.popBehavior = .animated(animation: .translation)
     attrs.entryBackground = .color(color: EKColor(color))
-    attrs.statusBar = .light
+    attrs.statusBar = .inferred
     return attrs
   }
   
@@ -84,7 +84,7 @@ class QuotationsTVC: UIViewController {
     SwiftEntryKit.display(
       entry: contentView,
       using: getAttrs(
-        UIColor(rgb: 0xD32F2F),
+        .tnRed,
         duration: .infinity
       )
     )
@@ -98,7 +98,7 @@ class QuotationsTVC: UIViewController {
     let contentView = EKNoteMessageView(with: labelContent)
     SwiftEntryKit.display(
       entry: contentView,
-      using: getAttrs(UIColor(rgb: 0x69F0AE))
+      using: getAttrs(.tnGreen)
     )
   }
   
@@ -114,7 +114,7 @@ class QuotationsTVC: UIViewController {
     SwiftEntryKit.display(
       entry: contentView,
       using: getAttrs(
-        UIColor(rgb: 0x1976D2),
+        .tnBlue,
         duration: .infinity
       )
     )
@@ -132,7 +132,7 @@ class QuotationsTVC: UIViewController {
     SwiftEntryKit.display(
       entry: contentView,
       using: getAttrs(
-        UIColor(rgb: 0xE91E63),
+        .tnPurple,
         duration: .infinity
       )
     )
@@ -167,7 +167,7 @@ extension QuotationsTVC: QuotationsView {
     let emptyLabel = UILabel()
     emptyLabel.text = "NO DATA"
     emptyLabel.textColor = UIColor.systemGray3
-    emptyLabel.font = UIFont.boldSystemFont(ofSize: 24)
+    emptyLabel.font = UIFont.boldSystemFont(ofSize: 36)
     
     view.addSubview(emptyLabel)
     emptyLabel.snp.makeConstraints { (make) in
