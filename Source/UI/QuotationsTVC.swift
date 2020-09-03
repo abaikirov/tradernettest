@@ -132,7 +132,7 @@ class QuotationsTVC: UIViewController {
     SwiftEntryKit.display(
       entry: contentView,
       using: getAttrs(
-        .tnPurple,
+        .tnBlue,
         duration: .infinity
       )
     )

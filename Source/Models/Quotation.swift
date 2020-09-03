@@ -13,9 +13,19 @@ struct Quotation {
   var diffInPercent: Double? //pcp
   var lastTradeExchange: String? //ltr
   var name: String? //name
-  var lastTradePrice: Double? //ltp
-  var change: Double? //chg
-  var minStep: Double? //min_step
+  var lastTradePrice: Decimal? //ltp
+  var change: Decimal? //chg
+  var minStep: Decimal? //min_step
+  
+  var roundedLastPrice: Decimal? {
+    guard let minStep = minStep, let price = lastTradePrice else { return nil }
+    return qRound(minStep, price)
+  }
+  
+  var roundedChange: Decimal? {
+    guard let minStep = minStep, let price = change else { return nil }
+    return qRound(minStep, price)
+  }
   
   init?(dictionary: [String: Any]) {
     guard
@@ -28,9 +38,12 @@ struct Quotation {
     diffInPercent = dictionary["pcp"] as? Double
     lastTradeExchange = dictionary["ltr"] as? String
     name = dictionary["name"] as? String
-    lastTradePrice = dictionary["ltp"] as? Double
-    change = dictionary["chg"] as? Double
-    minStep = dictionary["min_step"] as? Double
+    let ltp = dictionary["ltp"] as? Double
+    lastTradePrice = ltp?.tnDecimalValue
+    let chg = dictionary["chg"] as? Double
+    change = chg?.tnDecimalValue
+    let step = dictionary["min_step"] as? Double
+    minStep = step?.tnDecimalValue
     
     if let nameData = name?.data(using: .isoLatin1) {
       if let decodedName = String(data: nameData, encoding: .utf8) {
@@ -39,10 +52,12 @@ struct Quotation {
     }
   }
   
-  func getRoundedToMinStepPrice() -> String {
-    guard let minStep = minStep, let price = lastTradePrice else { return "\(lastTradePrice ?? 0.0)" }
-    let denominator = 1 / minStep
-    return String(round(price * denominator) / denominator)
+  private func qRound(_ step: Decimal, _ price: Decimal) -> Decimal? {
+    let denominator = 1 / step
+    if let rounded = round((price * denominator).tnDoubleValue).tnDecimalValue {
+      return rounded / denominator
+    }
+    return nil
   }
   
   mutating func update(q: Quotation) {

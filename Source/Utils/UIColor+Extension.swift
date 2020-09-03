@@ -26,7 +26,6 @@ extension UIColor {
   }
   
   static let tnGreen = UIColor(rgb: 0x00C853)
-  static let tnRed = UIColor(rgb: 0xDD2C00)
+  static let tnRed = UIColor(rgb: 0xB71C1C)
   static let tnBlue = UIColor(rgb: 0x1976D2)
-  static let tnPurple = UIColor(rgb: 0xE91E63)
 }

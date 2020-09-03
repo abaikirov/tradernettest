@@ -26,23 +26,25 @@ class QuotationVMImpl: QuotationVM {
   
   var percent: String {
     if q.diffInPercent != nil {
-      return "\(q.diffInPercent!)"
+      return "\(q.diffInPercent! >= 0 ? "+" : "")\(q.diffInPercent!)"
     } else {
       return "---"
     }
   }
   
   var price: String {
-    if q.lastTradePrice != nil {
-      return "\(q.lastTradePrice!)"
+    let rounded = q.roundedLastPrice
+    if rounded != nil {
+      return "\(rounded!)"
     } else {
       return "---"
     }
   }
   
   var change: String {
-    if q.change != nil {
-      return "\(q.change!)"
+    let rounded = q.roundedChange
+    if rounded != nil {
+      return "\(rounded! >= 0 ? "+" : "")\(rounded!)"
     } else {
       return "---"
     }
