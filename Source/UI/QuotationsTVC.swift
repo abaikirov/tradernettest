@@ -7,36 +7,44 @@
 //
 
 import UIKit
-import SocketIO
+import SnapKit
 
-class QuotationsTVC: UITableViewController, QuotationsView {
-  var vm: QuotationsTVCVM!
+class QuotationsTVC: UIViewController {
+  var vm: QuotationsTVCVM
   
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
+  private lazy var tableView: UITableView = {
+    let tableView = UITableView()
+    tableView.register(QuotationsCell.self, forCellReuseIdentifier: QuotationsCell.reuseID)
+    tableView.dataSource = self
+    return tableView
+  }()
   
-  override init(style: UITableView.Style) {
-    super.init(style: style)
-    setup()
+  init(vm: QuotationsTVCVM) {
+    self.vm = vm
+    super.init(nibName: nil, bundle: nil)
   }
   
   required init?(coder: NSCoder) {
-    super.init(coder: coder)
-    setup()
-  }
-  
-  private func setup() {
-    vm = QuotationsTVCVMImpl()
-    vm.view = self
+    fatalError()
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupView()
     vm.viewDidLoad()
   }
   
+  private func setupView() {
+    title = "Quotations"
+    
+    view.addSubview(tableView)
+    tableView.snp.makeConstraints { (make) in
+      make.edges.equalToSuperview()
+    }
+  }
+}
+
+extension QuotationsTVC: QuotationsView {
   func show(toUpdate: [Int], toAdd: [Int]) {
     tableView.beginUpdates()
     tableView.reloadRows(at: toUpdate.map { IndexPath(item: $0, section: 0) }, with: .automatic)
@@ -59,16 +67,31 @@ class QuotationsTVC: UITableViewController, QuotationsView {
   func showError() {
     //TODO
   }
+}
+
+extension QuotationsTVC: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { vm.count }
   
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    vm.count
-  }
-  
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: "quotationsCell") as? QuotationsCell else {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: QuotationsCell.reuseID) as? QuotationsCell else {
       fatalError()
     }
     cell.onBind(q: vm.get(indexPath.row))
     return cell
+  }
+}
+
+extension QuotationsTVC {
+  static func instance() -> QuotationsTVC {
+    let vm = QuotationsTVCVMImpl()
+    let vc = QuotationsTVC(vm: vm)
+    vm.view = vc
+    return vc
+  }
+  
+  static func instanceInNavigation() -> UINavigationController {
+    let nav = UINavigationController(rootViewController: instance())
+    nav.navigationBar.prefersLargeTitles = true
+    return nav
   }
 }

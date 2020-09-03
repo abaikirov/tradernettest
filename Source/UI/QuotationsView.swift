@@ -9,7 +9,7 @@
 import Foundation
 
 protocol QuotationsView: class {
-  var vm: QuotationsTVCVM! { get set }
+  var vm: QuotationsTVCVM { get set }
   
   func show(toUpdate: [Int], toAdd: [Int])
   func showConnected()
