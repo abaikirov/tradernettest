@@ -116,15 +116,7 @@ class QuotationsCell: UITableViewCell {
   func onBind(q: QuotationVM) {
     qTicker.text = q.ticker
     qLastTradeExchange.text = "\(q.exchange) | \(q.name)"
-    qDiffInPercent.text = "\(q.percent)%"
-    qPrice.text = "\(q.price) (\(q.change))"
-    if (q.isChanged) {
-      qDiffInPercent.backgroundColor = q.percentChangedBackColor
-      qDiffInPercent.textColor = q.percentChangedColor
-    } else {
-      qDiffInPercent.backgroundColor = .clear
-      qDiffInPercent.textColor = q.percentColor
-    }
+    onUpdate(q: q)
     if (q.imageURL != nil) {
       qIcon.kf.setImage(with: q.imageURL) { [unowned self] (result) in
         switch result {
@@ -134,6 +126,18 @@ class QuotationsCell: UITableViewCell {
           return
         }
       }
+    }
+  }
+  
+  func onUpdate(q: QuotationVM) {
+    qDiffInPercent.text = "\(q.percent)%"
+    qPrice.text = "\(q.price) (\(q.change))"
+    if (q.isChanged) {
+      qDiffInPercent.backgroundColor = q.percentChangedBackColor
+      qDiffInPercent.textColor = q.percentChangedColor
+    } else {
+      qDiffInPercent.backgroundColor = .clear
+      qDiffInPercent.textColor = q.percentColor
     }
   }
   

@@ -141,10 +141,16 @@ class QuotationsTVC: UIViewController {
 
 extension QuotationsTVC: QuotationsView {
   func show(toUpdate: [Int], toAdd: [Int]) {
-    tableView.beginUpdates()
-    tableView.reloadRows(at: toUpdate.map { IndexPath(item: $0, section: 0) }, with: .automatic)
-    tableView.insertRows(at: toAdd.map { IndexPath(item: $0, section: 0) }, with: .automatic)
-    tableView.endUpdates()
+    for updateItem in toUpdate {
+      if let cell = tableView.cellForRow(at: IndexPath(item: updateItem, section: 0)) as? QuotationsCell {
+        cell.onUpdate(q: vm.get(updateItem))
+      }
+    }
+    if (!toAdd.isEmpty) {
+      tableView.beginUpdates()
+      tableView.insertRows(at: toAdd.map { IndexPath(item: $0, section: 0) }, with: .automatic)
+      tableView.endUpdates()
+    }
   }
   
   func showConnect() {
